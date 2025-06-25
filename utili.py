@@ -96,3 +96,25 @@ def ArchiPesoMaggiore(self):
 def getMaxPercorso(self,nodo):
     newNodo=self._idMap[nodo]
     return dfs_tree(self._grafo,newNodo)
+
+
+#controller: fillDD, creaGrafo: PULISCI SEMPRE E AGGIORNA!!!
+def fillDDYear(self):
+    self._view._ddAnno.options.clear()
+    anni=self._model.getYears()
+    for a in anni:
+        self._view._ddAnno.options.append(ft.dropdown.Option(a))
+    self._view.update_page()
+
+def handleCreaGrafo(self,e):
+    anno=self._view._ddAnno.value
+    self._view.txt_result.controls.clear()
+    self._model.buildGraph(anno)
+    self._view.txt_result.controls.append(ft.Text(f"Grafo correttamente creato:"))
+    self._view.txt_result.controls.append(ft.Text(f"Numero di nodi: {self._model.getNumNodes()}"))
+    self._view.txt_result.controls.append(ft.Text(f"Numero di archi: {self._model.getNumEdges()}"))
+
+    pilota,score=self._model.getBestDriver()
+    self._view.txt_result.controls.append(ft.Text(f"Best driver: {pilota}, with score {score}"))
+
+    self._view.update_page()
